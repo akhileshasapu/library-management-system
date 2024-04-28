@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User and Admin Profiles</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-image: url('IAMGES/Screenshot 2024-03-31 122608.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 100vh; /* Ensure the body covers the entire viewport height */
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .element {
+      margin-top: 10px;
+      padding-left: 2px;
+      border-radius: 90px;
+      color: #232222;
+      box-shadow: 4px 3px 4px 2px;
+    }
+
+    .element img {
+      width: 150px;
+    }
+
+    h3 {
+      color: aliceblue;
+    }
+
+    .custom-cursor {
+      cursor: pointer;
+      background-color: #3498db;
+      color: #ffffff;
+      padding: 10px;
+      text-align: center;
+    }
+
+    h3 {
+      color: rgb(0, 0, 0);
+      display: flex;
+      justify-content: center;
+      padding-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="content">
+    <h1>LIBRARY MANAGEMENT SYSTEM</h1>
+  
+    <div style="display: flex; justify-content: center;">
+      <div class="element">
+        <a href="admin login.html" target="_self">
+          <img src="./IAMGES/admin.png" alt="Admin" width="150px">
+        </a>
+        <h3>ADMIN</h3>
+      </div>
+
+      <div class="element" style="margin-left: 120px;">
+        <a href="user login.html" target="_self">
+          <img src="./IAMGES/user.png" alt="Student" width="147px">
+        </a>
+        <h3>STUDENT</h3>
+      </div>
+    </div>
+  
+    <h3>To create a new account, click on Register</h3>
+    <div style="display: flex; justify-content: center; margin-top: 6px;">
+      <a class="element" href="register.html" target="_self">
+        <button class="custom-cursor" type="submit">Register</button>
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>

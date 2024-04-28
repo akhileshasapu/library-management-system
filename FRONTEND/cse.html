@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <style>
+            nav a {
+    color: #d8d8d8; /* default link color */
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s ease;
+     /* smooth color transition */
+}
+
+nav a:hover {
+    color: #ffffff; /* color change on hover */
+}
+
+/* Hand cursor on hover */
+nav a:hover {
+    cursor: pointer;
+}
+
+/* Hand cursor on links */
+nav a {
+    cursor: pointer;
+}
+
+/* Hand cursor on list items */
+nav li {
+    cursor: pointer;
+}
+
+        .title{
+            position: absolute;
+            top: 10px;
+            left: 10px;
+         }
+        /* CSS
+         for positioning the account logo */
+         
+        .account-logo {
+            border-radius: 30px;
+            box-shadow:5px 5px 5px 0px #333;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            width: 70px; /* Adjust size as needed */
+            height: 70px; /* Adjust size as needed */
+            cursor: pointer;
+            
+        }
+       
+        /* CSS for the slide section */
+        .slide-section {
+            display: none;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px; /* Adjust width as needed */
+            height: 100%;
+            background-color: #f0f0f0; /* Adjust background color as needed */
+            padding: 20px;
+            box-sizing: border-box;
+            z-index: 1000; /* Ensure the slide section is above other content */
+        }
+        header {
+           
+            top: 0;
+            
+            color: rgb(255, 245, 245);
+            text-align: center;
+        
+            
+        }
+        li {
+            display: inline;
+            margin-right: 35px; /* Adjust margin to control space between nav items */
+        }
+        body{
+
+
+            background-image:url(IAMGES/cybersecurity-computer-science.jpg) ;
+        
+            background-repeat: no-repeat;
+        background-size: cover;
+        }
+        
+        footer {
+            
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        #book-container {
+  text-align: center;
+  margin-top: 50px;
+  flex-direction: column;
+  
+ 
+  display: flex;
+  justify-content: center;
+  
+  
+}
+.book-button {
+  display: block; /* Displays elements in a line */
+  margin-right: 10px; 
+  align-items: center;/* Adjust margin as needed */
+  text-align: center;
+  width: 200px;
+  height: 50px;
+  margin-left: 650px;
+  margin-top: 20px;
+
+ 
+}
+
+
+
+.floating-window {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f9f9f9;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.floating-window h2 {
+  margin-top: 0;
+}
+
+.floating-window button {
+  margin-top: 10px;
+}
+
+   
+      
+    </style>
+</head>
+<body>
+    
+
+    <body>
+        <header>
+         <div style="display:flex;justify-content: flex-start;padding-left: 40px;margin-top: 50px;">
+            <h1>COMPUTER SCIENCE AND ENGINEERING</h1>
+        </div>
+            <nav style="display: flex;padding-right: 20px;justify-content: flex-end;font-size: larger;position:absolute;top: 70px;right: 20px; ">
+                <ul>
+                    <li><a  href="home page1.html">Home</a></li>
+                    <li><a  href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a  href="#">Contact</a></li>
+                </ul>
+                
+            </nav>
+        
+    
+    
+        </header>
+    
+        <div id="book-container" ></div>
+
+    
+    Account logo -->
+<img src="IAMGES/user.png"  class="account-logo" id="account-logo">
+
+</div>
+
+
+<!-- Slide section -->
+<div class="slide-section" id="slide-section">
+    <h2>Account Details</h2>
+    <p>Username: example</p>
+    <p>Email: example@example.com</p>
+</div>
+
+ 
+<script>
+   
+
+    function showBookDetails(title, author,token, count) {
+    // Update the book details in the floating window
+    document.getElementById('book-title').textContent = title;
+    document.getElementById('book-author').textContent = author;
+    document.getElementById('token').textContent = token;
+    document.getElementById('count').textContent = count;
+    
+    // Show the floating window
+    document.getElementById('floating-window').style.display = 'block';
+  }
+
+  function hideBookDetails() {
+    // Hide the floating window
+    document.getElementById('floating-window').style.display = 'none';
+  }
+
+
+  async function reserveBook(token) {
+
+   
+    // Perform reservation logic here
+try {
+   const data={
+    bookToken : token
+   }
+  
+  const issue = await fetch('http://localhost:3000/api/issues/issue',{
+    method: 'POST',
+    headers:{
+          "Content-Type": "application/json",
+            Authorization:localStorage.getItem('token')
+        },
+
+        body: JSON.stringify(data),
+
+  }).then(response => response.json())
+
+  console.log(issue)
+
+  if(issue.message){
+    alert(issue.message)
+    location.reload();
+  }
+} catch (error) {
+
+  console.log(error)
+  alert('unable to issue the book')
+}
+  
+    // console.log('Reserve book with token:', token);
+  }
+
+  
+ 
+     document.addEventListener('DOMContentLoaded', function() {
+    fetch('http://localhost:3000/api/books/',{
+        headers:{
+            Authorization:localStorage.getItem('token')
+        }
+    })
+      .then(response => response.json())
+      .then(data => {
+        const bookContainer = document.getElementById('book-container');
+        data.books.forEach(book => { 
+
+          if(book.token >= 100 && book.token <= 200){
+            const button = document.createElement('button');
+          button.className = 'book-button';
+          button.textContent = book.title;
+
+          button.addEventListener('click', () => showBookDetails(book.title, book.author,book.token,book.available_count));
+          bookContainer.appendChild(button);
+            
+          }
+         
+        });
+      })
+      .catch(error => console.error('Error fetching books:', error));
+  });
+
+
+
+
+
+
+    
+</script>
+<div class="floating-window" id="floating-window">
+    <h2>Book Details</h2>
+    <p>id: <span id="token"></span></p>
+    <p>Title: <span id="book-title"></span></p>
+    <p>Author: <span id="book-author"></span></p>
+    <p>Available: <span id="count"></span></p>
+    <button onclick="reserveBook(document.getElementById('token').textContent)">Reserve</button>
+    <button onclick="hideBookDetails()">Close</button>
+  </div>
+</body>
+</html>

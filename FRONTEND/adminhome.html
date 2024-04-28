@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Book Form</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .header {
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #333;
+        color: #fff;
+      }
+      .header h1 {
+        margin: 0;
+        padding-left: 20px;
+        font-size: 24px;
+      }
+      .header a {
+        display: inline-block;
+        margin-left: 10px;
+        cursor: pointer;
+        text-decoration: none;
+        color: #fff;
+      }
+      .container {
+        position: fixed;
+        left: 20%;
+        top: 20%;
+        width: 60%;
+        transform: translate(-20%, -20%);
+        display: none;
+        max-width: 400px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      .issuedBooksContainer {
+        position: fixed;
+        top: 50%; /* Adjust top position */
+        left: 50%; /* Adjust left position */
+        transform: translate(-50%, -50%);
+        width: 100%; /* Increase width */
+        max-width: 800px; /* Optional: Set a maximum width */
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        display: none;
+        z-index: 9999; /* Optional: Set a higher z-index */
+    }
+      input[type="text"],
+      input[type="number"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      input[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+      .issued-list {
+        margin-top: 100px; /* Increase the margin-top */
+        padding-top: 20px;
+        border-top: 1px solid #ccc;
+        width: 90%; /* Increase the width of the issued books container */
+      }
+      .issued-book {
+        width: 380px;
+        display: flex;
+        flex-direction: column; /* Change to column layout */
+        justify-content: center;
+        align-items: flex-start;
+        margin-bottom: 20px; /* Increase the margin-bottom */
+        padding: 15px; /* Increase padding for spacing */
+        border: 1px solid #ccc; /* Add border for better separation */
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add box shadow for visual effect */
+    }
+      .issued-book button {
+        background-color: #f44336;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+      .issued-book button:hover {
+        background-color: #d32f2f;
+      }
+      .close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: transparent;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+      }
+      .close-button:hover {
+        color: red;
+      }
+      .user-details-container {
+        position: fixed;
+        top: 100px; /* Adjust the top position */
+        right: 10%; /* Adjust the right position */
+        width: 300px;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        display: none;
+      }
+      .user-details {
+        display: flex;
+        flex-direction: column;
+      }
+      .user-details label {
+        font-weight: bold;
+      }
+      .button-container {
+        margin-top: 250px;
+        display: flex;
+        justify-content: center;
+      }
+      .button-container button {
+        margin: 0 10px;
+        background-color: #4caf50;
+        color: white;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+      .button-container button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>LMS Admin</h1>
+      <div>
+        <a href="adminhome.html">Home</a>
+        <a href="about.html">About</a>
+        <img
+          src="/LMS/FRONTEND/IAMGES/admin.png"
+          alt="Profile"
+          onclick="showUserDetails()"
+        />
+      </div>
+    </div>
+
+    <div class="button-container">
+      <button id="openModal">Add Book</button>
+      <!-- Add Book Button -->
+      <button id="viewIssued">View Issued Books</button>
+      <!-- View Issued Books Button -->
+    </div>
+
+    <div class="container" id="bookFormContainer">
+      <!-- Container for the form -->
+      <button class="close-button" id="closeModal">&times;</button>
+      <h2>Add Book</h2>
+      <form onsubmit="return addBook(event)">
+        <label for="token">Token:</label>
+        <input type="text" id="token" name="token" required />
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required />
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" required />
+        <label for="total_count">Total Count:</label>
+        <input type="number" id="total_count" name="total_count" required />
+        <label for="available_count">Available Count:</label>
+        <input
+          type="number"
+          id="available_count"
+          name="available_count"
+          required
+        />
+        <input type="submit" value="Add Book" />
+      </form>
+    </div>
+
+    <div class="container" id="issuedBooksContainer">
+      <!-- Container for Issued Books -->
+      <button class="close-button" id="closeIssued">&times;</button>
+      <h2>Issued Books</h2>
+      <div class="issued-list" id="issuedList"></div>
+    </div>
+
+    <div class="user-details-container" id="userDetailsContainer">
+      <button class="close-button" id="closeUserDetails">&times;</button>
+      <!-- Closing button for user details -->
+      <div class="user-details" id="userDetails"></div>
+    </div>
+
+    <script>
+      var openModalBtn = document.getElementById("openModal");
+      var closeModalBtn = document.getElementById("closeModal");
+      var viewIssuedBtn = document.getElementById("viewIssued");
+      var closeIssuedBtn = document.getElementById("closeIssued");
+      var closeUserDetailsBtn = document.getElementById("closeUserDetails"); // Close button for user details
+      var bookFormContainer = document.getElementById("bookFormContainer");
+      var issuedBooksContainer = document.getElementById(
+        "issuedBooksContainer"
+      );
+     
+      var userDetailsContainer = document.getElementById(
+        "userDetailsContainer"
+      );
+      var userDetails = document.getElementById("userDetails");
+
+      openModalBtn.addEventListener("click", function () {
+        bookFormContainer.style.display = "block";
+        issuedBooksContainer.style.display = "none"; // Hide issued books container when add book form is shown
+        openModalBtn.style.left = "60%";
+      });
+
+      viewIssuedBtn.addEventListener("click", async function () {
+        // Simulated list of issued books with user details
+        // var issuedBooks = [
+        //   {
+        //     title: "Book 1",
+        //     author: "Author 1",
+        //     borrower: { name: "John Doe", rollNumber: "12345" },
+        //   },
+        //   {
+        //     title: "Book 2",
+        //     author: "Author 2",
+        //     borrower: { name: "Jane Smith", rollNumber: "54321" },
+        //   },
+        //   {
+        //     title: "Book 3",
+        //     author: "Author 3",
+        //     borrower: { name: "Alice Johnson", rollNumber: "98765" },
+        //   },
+        // ];
+
+        try {
+            var issuedList = document.getElementById("issuedList");
+          const issue = await fetch("http://localhost:3000/api/issues/", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+          }).then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          });
+
+          console.log(issue);
+          function deleteBook(id) {
+    console.log("Deleting book with ID: " + id);
+    // Here you can implement the logic to actually delete the book from the server
+    // For now, let's just display an alert
+    alert("Book is deleted!");
+}
+
+          if (issue) {
+            // Clear previous list
+            issuedList.innerHTML = "";
+
+            // Populate the list
+            issue.issues.forEach( (book)=> {
+              var bookItem = document.createElement("div");
+              bookItem.classList.add("issued-book");
+              const date = new Date(book.issue_date).toISOString().substring(0, 10);
+              bookItem.innerHTML = `<span>${book.book_token} ISSUE DATE ${date}</span><span>student id: ${book.studentRollNo}</span><button onclick="deleteBook(${book._id})">Delete</button>`;
+
+              issuedList.appendChild(bookItem);
+            });
+          }
+        } catch (error) {
+          console.log("error while fetching issues" + error);
+        }
+
+        bookFormContainer.style.display = "none"; // Hide add book form
+        issuedBooksContainer.style.display = "block"; // Show issued books container
+        openModalBtn.style.left = "50%";
+      });
+
+      closeModalBtn.addEventListener("click", function () {
+        bookFormContainer.style.display = "none";
+      });
+
+      closeIssuedBtn.addEventListener("click", function () {
+        issuedBooksContainer.style.display = "none";
+      });
+
+      closeUserDetailsBtn.addEventListener("click", function () {
+        // Close user details window
+        userDetailsContainer.style.display = "none";
+      });
+
+      function redirectTo(page) {
+        // Code to redirect to different pages based on the icon clicked
+        window.location.href = page;
+      }
+
+      function showUserDetails() {
+        // Simulated user details
+        var user = {
+          username: "admin",
+          email: "admin@example.com",
+          role: "Administrator",
+        };
+
+
+
+        // Display user details
+        userDetails.innerHTML = `
+                <label>Username:</label>
+                <span>${user.username}</span>
+                <label>Email:</label>
+                <span>${user.email}</span>
+                <label>Role:</label>
+                <span>${user.role}</span>
+            `;
+
+        userDetailsContainer.style.display = "block";
+      }
+
+      async function addBook(event) {
+        event.preventDefault();
+        console.log("hi");
+        try {
+          const token = document.getElementById("token");
+          const author = document.getElementById("author");
+          const title = document.getElementById("title");
+          const available_count = document.getElementById("available_count");
+          const total_count = document.getElementById("total_count");
+
+          //available_count,total_count,author
+
+          const data = {
+            token: token.value,
+            title: title.value,
+            author: author.value,
+            available_count: available_count.value,
+            total_count: total_count.value,
+          };
+
+          const newBook = await fetch("http://localhost:3000/api/books/", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+            body: JSON.stringify(data),
+          }).then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          });
+          //  console.log(newBook)
+          if (newBook.token) {
+            alert("added new book ");
+            location.reload();
+          }
+        } catch (error) {
+          console.log("error while adding book" + error);
+        }
+
+      }
+   
+    </script>
+  </body>
+</html>

@@ -1,0 +1,207 @@
+
+<html lang="en">
+<head>
+    
+    <title>LMS HOME</title>
+    <style>
+        .branch{
+            border-radius: 10px;
+            border: 1px solid #cccccc;
+    
+            box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
+        }
+        .pop-element {
+    width: 200px;
+    height: 100px;
+
+    
+    
+    
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.pop-element:hover {
+    transform: scale(1.1); /* Scale up the element on hover */
+}
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #06173b;
+            
+            
+        }
+ 
+        header {
+            background-color: #06173b;
+            color: rgb(255, 255, 255);
+            text-align: center;
+        
+            
+        }
+        nav a {
+    color: #c9c4c4; /* default link color */
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s ease;
+     /* smooth color transition */
+}
+
+nav a:hover {
+    color: #ffffff; /* color change on hover */
+}
+
+/* Hand cursor on hover */
+nav a:hover {
+    cursor: pointer;
+}
+
+/* Hand cursor on links */
+nav a {
+    cursor: pointer;
+}
+
+/* Hand cursor on list items */
+nav li {
+    cursor: pointer;
+}
+.account-logo {
+            border-radius: 30px;
+            box-shadow:5px 5px 5px 0px #333;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            width: 70px; /* Adjust size as needed */
+            height: 70px; /* Adjust size as needed */
+            cursor: pointer;
+            
+        }
+       
+        /* CSS for the slide section */
+        .slide-section {
+            display: none;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px; /* Adjust width as needed */
+            height: 100%;
+            background-color: #f0f0f0; /* Adjust background color as needed */
+            padding: 20px;
+            box-sizing: border-box;
+            z-index: 1000; /* Ensure the slide section is above other content */
+        }
+       
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        li {
+            display: inline;
+            margin-right: 35px; /* Adjust margin to control space between nav items */
+        }
+        body
+        {
+
+        background-image: url(IAMGES/Picsart_24-03-25_15-27-02-889.jpg);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        
+
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+     <div style="display:flex;justify-content: flex-start;padding-left: 20px;margin-top: 50px;">
+        <h1>LIBRARY MANAGEMENT SYSTEM</h1>
+    </div>
+        <nav style="display: flex;padding-right: 20px;justify-content: flex-end;font-size: larger; ">
+            <ul>
+                <li><a  href="#">Home</a></li>
+                <li><a  href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a  href="#">Contact</a></li>
+            </ul>
+            
+        </nav>
+    
+
+
+    </header>
+    <div>        <!-- div
+    
+        Account logo -->
+    <img src="IAMGES/user.png"  class="account-logo" id="account-logo">
+    
+    </div>
+    
+    
+    <!-- Slide section -->
+    <div class="slide-section" id="slide-section">
+        <h2>Account Details</h2>
+        <p>Username: example</p>
+        <p>Email: example@example.com</p>
+    </div>
+    
+<main>
+    
+        <div  style="display: flex;justify-content: space-around;padding-top: 60px;">
+<a class="pop-element" href="cse.html">
+
+  <img class="branch" src="IAMGES/images.png" width="230px" height="200px">
+  
+</a>
+<a class="pop-element" href="ece.html">
+
+    <img class="branch" src="IAMGES/ece_logo_by_gangadhar666_dc5dvwj-pre.jpg" width="240px">
+    
+  </a>
+  <a class="pop-element" href="mech.html">
+
+    <img class="branch" src="IAMGES/Screenshot 2024-03-25 104209.png" width="230px" >
+    
+  </a>
+  <a class="pop-element" href="civil.html">
+
+    <img class="branch" src="IAMGES/Screenshot 2024-03-25 103557.png" width="230px">
+    
+  </a>
+        </div>
+</main>
+
+    <footer>
+        <p>&copy; 2024 library MANAGEMENTsytem. All rights reserved.</p>
+    </footer>
+    <script> const accountLogo = document.getElementById('account-logo');
+        const slideSection = document.getElementById('slide-section');
+    
+        function closeSlideSection() {
+            slideSection.style.display = 'none';
+        }
+    
+        // Event listener for account logo click
+        accountLogo.addEventListener('click', function(event) {
+            event.stopPropagation(); // Prevent closing the slide section when clicking on the logo
+            slideSection.style.display = slideSection.style.display === 'none' ? 'block' : 'none';
+        });
+    
+        // Event listener for clicks outside the slide section
+        document.body.addEventListener('click', function(event) {
+            const slideSectionClicked = slideSection.contains(event.target);
+            if (!slideSectionClicked) {
+                closeSlideSection();
+            }
+        });
+    </script>
+</body>
+</html>

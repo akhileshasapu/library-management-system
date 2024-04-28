@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <style>
+        /* CSS for positioning the account logo */
+        .account-logo {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 50px; /* Adjust size as needed */
+            height: 50px; /* Adjust size as needed */
+            cursor: pointer;
+        }
+
+        /* CSS for the slide section */
+        .slide-section {
+            display: none;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px; /* Adjust width as needed */
+            height: 100%;
+            background-color: #f0f0f0; /* Adjust background color as needed */
+            padding: 20px;
+            box-sizing: border-box;
+            z-index: 1000; /* Ensure the slide section is above other content */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Account logo -->
+<img src="account-logo.png" alt="Account Logo" class="account-logo" id="account-logo">
+
+<!-- Slide section -->
+<div class="slide-section" id="slide-section">
+    <h2>Account Details</h2>
+    <p>Username: example</p>
+    <p>Email: example@example.com</p>
+</div>
+
+<!-- Your page content goes here -->
+<h1>Welcome to Your Website</h1>
+<p>This is a general page layout.</p>
+
+<script>
+    // JavaScript to toggle slide section visibility
+    const accountLogo = document.getElementById('account-logo');
+    const slideSection = document.getElementById('slide-section');
+
+    accountLogo.addEventListener('click', function() {
+        // Toggle slide section visibility
+        if (slideSection.style.display === 'none' || slideSection.style.display === '') {
+            slideSection.style.display = 'block';
+        } else {
+            slideSection.style.display = 'none';
+        }
+    });
+</script>
+
+</body>
+</html>

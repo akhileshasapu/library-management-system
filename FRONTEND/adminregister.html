@@ -1,0 +1,95 @@
+<html>
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      background-image: url(674227517-64d879dee85cedffbfc764c74d546bd078166e36a3f456abaa8423085a5a2c23-d_640x360.jpg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-container {
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      border-radius: 8px;
+    
+    }
+    video {
+            position: fixed;
+          
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 120%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+  
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #3498db;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <video autoplay muted loop poster="">
+    <source src="./IAMGES/black_-_13495 (720p).mp4" type="video/mp4">
+   
+</video>
+  <div class="login-container">
+    <h1>Admin Registration</h1>
+    <form onsubmit="return validateForm(event)">
+      <label for="full name">Full Name:</label>
+      <input type="text" id="fullName" name="Full Name" required>
+      
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+     
+      <!-- <label for="password">secret pin:</label>
+      <input type="password" id="code" name="secret code" required> -->
+      <button type="submit">SUBMIT</button>
+    </form>
+  </div>
+  <script src="../FRONTEND/script/admin/register.js" defer></script>
+
+</body>
+</html>
